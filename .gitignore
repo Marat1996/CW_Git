@@ -1,0 +1,24 @@
+# created by virtualenv automatically
+venv/bin
+# Virtual environment
+venv/
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Logs
+*.log
+
+# Temporary files
+*.pyc
+*.pyo
+*.pyd
+
+# PyCharm files
+.idea/
+
+# Environment variables file
+.env
