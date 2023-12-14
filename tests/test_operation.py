@@ -1,6 +1,6 @@
 import unittest
-from models.operation import Operation
-from datetime import datetime
+
+from models.operation import Operation, mask_account_number
 
 
 class TestOperation(unittest.TestCase):
@@ -29,13 +29,11 @@ class TestOperation(unittest.TestCase):
         self.assertEqual(formatted_output, expected_output)
 
     def test_mask_account_number(self):
-        masked_card_number = self.sample_operation.mask_account_number("MasterCard 1234 5678 9012 3456").strip()
-        masked_account_number = self.sample_operation.mask_account_number("Account 9876543210").strip()
+        mask_account_number("MasterCard 1234 5678 9012 3456").strip()
+        mask_account_number("Account 9876543210").strip()
 
-        expected_card_number = "**** **** 3456"
-        expected_account_number = "Account ****3210"
-
-
+        "**** **** 3456"
+        "Account ****3210"
 
     def test_convert_payment_transfer(self):
         converted_payment = self.sample_operation.convert_payment().strip()
