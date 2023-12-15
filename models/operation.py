@@ -1,12 +1,15 @@
+
+
 from datetime import datetime
 
 
 def mask_account_number(account_number: str) -> str:
     if account_number.startswith("Счет"):
-        return f"Счет **{account_number[-4:]}"
+        account_digits = "".join(filter(str.isdigit, account_number))
+        return f"Счет {account_digits[:4]} {account_digits[4:6]}** **** {account_digits[-4:]}"
     elif account_number.startswith(("Maestro", "Master", "Visa")):
-        card_number = account_number.split()[-1]
-        return f"{account_number[:6]} {'*' * (len(card_number) - 10)} {card_number[-4:]}"
+        card_number = "".join(filter(str.isdigit, account_number))
+        return f"{account_number[:6]} {card_number[:4]} {card_number[4:6]}** **** {card_number[-4:]}"
     else:
         return f"{account_number[:6]}{'*' * (len(account_number) - 12)}{account_number[-4:]}"
 
@@ -21,7 +24,6 @@ class Operation:
             description: str,
             from_: str,
             to: str
-
     ):
         self.pk = pk
         self.date = date
