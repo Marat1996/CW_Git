@@ -1,5 +1,5 @@
 import unittest
-from datetime import datetime
+
 from models.operation import Operation
 
 
@@ -56,8 +56,6 @@ class TestOperation(unittest.TestCase):
             "100 USD"
         )
         self.assertEqual(converted_payment, expected_output)
-
-
 
 
 if __name__ == '__main__':

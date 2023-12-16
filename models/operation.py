@@ -53,3 +53,24 @@ class Operation:
             return f"{self.description}\n" \
                    f"{mask_account_number(self.from_)} -> {mask_account_number(self.to)}\n" \
                    f"{self.operation_amount['amount']} {self.operation_amount['currency']['name']}"
+
+    def is_executed(self):
+        return self.state == "EXECUTED"
+
+    @staticmethod
+    def get_last_executed_operations(operations, n=5):
+        executed_operations = [op for op in operations if op.is_executed()]
+
+        print("All Executed Operations:")
+        for op in executed_operations:
+            print(op.format_operation())
+
+        last_executed_operations = sorted(executed_operations,
+                                          key=lambda op: datetime.strptime(op.date, "%Y-%m-%dT%H:%M:%S.%f"),
+                                          reverse=True)[:n]
+
+        print("\nLast Executed Operations:")
+        for op in last_executed_operations:
+            print(op.format_operation())
+
+        return last_executed_operations
